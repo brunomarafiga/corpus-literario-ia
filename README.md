@@ -78,3 +78,11 @@ Edite o arquivo `sources.json` adicionando novos objetos JSON com a estrutura:
 
 ---
 *Projeto desenvolvido como parte das atividades de pesquisa do OBIA - UFPR.*
+
+## Contexto do projeto
+
+Pipeline de pesquisa desenvolvido no OBIA/UFPR para coleta, limpeza, segmentação e classificação temática de textos literários. O projeto organiza fontes públicas em datasets estruturados para experimentos de NLP e embeddings.
+
+**Temas:** Python, web scraping, NLP, datasets e inteligência artificial.
+
+[Ver repositório](https://github.com/brunomarafiga/extracao_poemas)
