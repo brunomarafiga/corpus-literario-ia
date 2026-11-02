@@ -1,80 +1,81 @@
-# Projeto de Iniciação Científica - OBIA
+<div align="center">
 
-**Observatório Brasileiro de Inteligência Artificial (OBIA)**  
-**Pesquisador PIBIC:** Bruno Marafiga  
-**Área:** Pipelines de Dados para IA, Web Scraping e Benchmarking de Modelos.
+# 📜 Pipeline de Web Scraping & NLP para Corpus Textual
+### Observatório Brasileiro de Inteligência Artificial (OBIA) • UFPR
 
-## 📌 Sobre o Projeto
+**Construção e Curadoria Automatizada de Corpus Textual para Benchmarking de Modelos de Embeddings**
 
-Este repositório contém os scripts e ferramentas desenvolvidos durante a Iniciação Científica (PIBIC) no OBIA/UFPR. O foco principal é o desenvolvimento de pipelines automatizados para **coleta, tratamento e estruturação de dados** voltados para o treinamento e benchmarking de modelos de Inteligência Artificial, especificamente na geração de **embeddings**.
+[![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)](https://python.org)
+[![Instituição](https://img.shields.io/badge/Inicia%C3%A7%C3%A3o%20Cient%C3%ADfica-OBIA%20%2F%20UFPR-004587)](https://www.ufpr.br)
+[![Área](https://img.shields.io/badge/%C3%81rea-NLP%20%7C%20Web%20Scraping%20%7C%20Embeddings-purple)](#)
+[![Status](https://img.shields.io/badge/Status-PIBIC%20Ativo-brightgreen)](#)
 
-O projeto atual foca na criação de um **Corpus Textual Classificado** (baseado nos 4 elementos: Água, Terra, Ar, Fogo) extraído de obras literárias clássicas em domínio público.
-
-## 🚀 Funcionalidades
-
-- **Web Scraping Automatizado**: Coleta de textos brutos diretamente de fontes como Project Gutenberg.
-- **Processamento de Linguagem Natural (NLP) Básico**:
-  - Limpeza de cabeçalhos/rodapés de licenças.
-  - Segmentação em parágrafos e frases.
-  - Classificação temática baseada em palavras-chave.
-- **Geração de Datasets Balanceados**: Criação de arquivos estruturados (`.ods` ou `.csv`) prontos para treinamento de modelos.
-- **Validação de Dados**: Scripts para verificar a integridade e distribuição do corpus gerado.
-
-## 📂 Estrutura do Projeto
-
-- `corpus_generator.py`: Script principal. Lê as fontes, baixa os textos, processa, classifica e gera o dataset balanceado.
-- `verify_corpus.py`: Script de utilidade para ler o último dataset gerado e exibir estatísticas (distribuição de classes, contagem de registros, nulos, etc.).
-- `sources.json`: Arquivo de configuração contendo a lista de obras literárias (Título, Autor, URL) para extração.
-- `data/`: Diretório onde os textos brutos baixados são armazenados (cache).
-- `output/`: Diretório onde os datasets finais processados são salvos.
-
-## 🛠️ Instalação e Configuração
-
-Certifique-se de ter o **Python 3.8+** instalado.
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/brunomarafiga/extracao_poemas.git
-   cd extracao_poemas
-   ```
-
-2. Instale as dependências necessárias:
-   ```bash
-   pip install pandas requests odfpy openpyxl
-   ```
-   *Nota: `odfpy` é necessário para suporte a arquivos .ods (OpenDocument Spreadsheet).*
-
-## 💻 Como Usar
-
-### 1. Gerar o Dataset
-Execute o script gerador. Ele fará o download das obras listadas em `sources.json` (se ainda não estiverem na pasta `data/`) e criará um novo arquivo na pasta `output/`.
-
-```bash
-python corpus_generator.py
-```
-
-### 2. Verificar o Dataset
-Para analisar a distribuição dos dados gerados e garantir que não há erros:
-
-```bash
-python verify_corpus.py
-```
-
-### 3. Adicionar Novas Fontes
-Edite o arquivo `sources.json` adicionando novos objetos JSON com a estrutura:
-```json
-{
-  "author": "Nome do Autor",
-  "title": "Título da Obra",
-  "url": "URL_DO_ARQUIVO_TXT"
-}
-```
-
-## 📈 Próximos Passos
-
-- [ ] **Treinamento de Embeddings**: Utilizar o dataset gerado para treinar modelos (Word2Vec, Doc2Vec ou Fine-tuning de BERT).
-- [ ] **Benchmarking**: Comparar a qualidade dos embeddings gerados com modelos pré-treinados em tarefas de similaridade semântica e classificação.
-- [ ] **Integração com LLMs**: Avaliar o desempenho em tarefas de RAG (Retrieval-Augmented Generation).
+</div>
 
 ---
-*Projeto desenvolvido como parte das atividades de pesquisa do OBIA - UFPR.*
+
+## 📌 Contexto da Pesquisa
+
+Este projeto integra as pesquisas de Iniciação Científica (PIBIC) vinculadas ao **Observatório Brasileiro de Inteligência Artificial (OBIA)** da **Universidade Federal do Paraná (UFPR)**.
+
+O objetivo da pesquisa é projetar pipelines computacionais para **coleta, limpeza, segmentação e rotulagem estruturada de textos literários clássicos** em domínio público, criando um corpus robusto para avaliação (*benchmarking*) de modelos contemporâneos de **embeddings textuais** e representações semânticas.
+
+---
+
+## 🔄 Arquitetura do Pipeline
+
+```mermaid
+flowchart LR
+    A[Fontes: Project Gutenberg & Domínio Público] --> B[Web Scraping Automatizado: corpus_generator.py]
+    B --> C[Pré-processamento: Remoção de Metadados & Ruídos]
+    C --> D[Segmentação Estrofe / Parágrafo]
+    D --> E[Rotulagem & Mapeamento Temático: Água, Terra, Ar, Fogo]
+    E --> F[Validação Estatística: verify_corpus.py]
+    F --> G[Corpus Estruturado JSON/Parquet para Modelos de IA]
+```
+
+---
+
+## 📂 Estrutura do Repositório
+
+```text
+├── corpus_generator.py      # Coleta automatizada, limpeza e extração dos textos-fonte
+├── verify_corpus.py         # Script de auditoria, contagem de tokens e verificação de integridade
+├── sources.json             # Catálogo estruturado de URLs, autores e metadados das obras
+├── data/                    # Textos brutos obtidos durante as etapas de scraping
+└── output/                  # Corpus processado, normalizado e rotulado para os experimentos
+```
+
+---
+
+## ✨ Funcionalidades Principais
+
+- **Scraping Resiliente:** Tratamento de requisições, headers personalizados e paginação em bases de literatura aberta.
+- **NLP e Higienização Avançada:** Remoção automática de prefácios, avisos de direitos autorais do Gutenberg, caracteres espúrios e normalização de quebras de linha poéticas.
+- **Auditoria de Qualidade:** O script `verify_corpus.py` avalia métricas estatísticas (vocabulário único, distribuição de tamanho de estrofes e dispersão de classes).
+
+---
+
+## 🚀 Como Executar
+
+```bash
+git clone https://github.com/brunomarafiga/extracao_poemas.git
+cd extracao_poemas
+pip install requests beautifulsoup4 pandas
+```
+
+1. Para executar o pipeline de extração:
+   ```bash
+   python corpus_generator.py
+   ```
+2. Para auditar a integridade e gerar o relatório do corpus:
+   ```bash
+   python verify_corpus.py
+   ```
+
+---
+
+<div align="center">
+Desenvolvido por <strong>Bruno Marafiga</strong><br>
+Pesquisador PIBIC • Observatório Brasileiro de Inteligência Artificial (OBIA / UFPR)
+</div>
